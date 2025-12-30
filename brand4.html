@@ -36,49 +36,55 @@ input{padding:8px}
 </head>
 <body>
 <div class="header">
-<div class="back" onclick="history.back()">‹</div>
-<div class="saldo" id="orderNumber"></div>
+  <div class="back" onclick="history.back()">‹</div>
+  <div class="saldo" id="orderNumber"></div>
 </div>
+
 <div class="main">
-<div class="top-info">
-<div class="box" id="sessionTime">05:00</div>
-<div class="box">PEDRO</div>
+  <div class="top-info">
+    <div class="box" id="sessionTime">05:00</div>
+    <div class="box">PEDRO</div>
+  </div>
+
+  <div class="content">
+    <div class="product-list">
+      <div class="product" data-jenis="PRODUK UNGGULAN">PRODUK UNGGULAN</div>
+      <div class="product" data-jenis="PRODUK GANDA">PRODUK GANDA</div>
+      <div class="product" data-jenis="GANDA BAGIAN">GANDA BAGIAN</div>
+      <div class="product" data-jenis="TUNGGAL BAGIAN">TUNGGAL BAGIAN</div>
+    </div>
+    <div class="logo-box"><img src="PEDRO.PNG" alt="PEDRO Logo"></div>
+  </div>
+
+  <div class="image-grid">
+    <div class="image-box"><img src="PEDRO1.JPG"></div>
+    <div class="image-box"><img src="PEDRO2.JPG"></div>
+    <div class="image-box"><img src="PEDRO3.JPG"></div>
+    <div class="image-box"><img src="PEDRO4.JPG"></div>
+    <div class="image-box"><img src="PEDRO5.JPG"></div>
+    <div class="image-box"><img src="PEDRO6.JPG"></div>
+    <div class="image-box"><img src="PEDRO7.JPG"></div>
+    <div class="image-box"><img src="PEDRO8.JPG"></div>
+    <div class="image-box"><img src="PEDRO9.JPG"></div>
+    <div class="image-box"><img src="PEDRO10.JPG"></div>
+    <div class="image-box"><img src="PEDRO11.JPG"></div>
+    <div class="image-box"><img src="PEDRO12.JPG"></div>
+    <div class="image-box"><img src="PEDRO13.JPG"></div>
+    <div class="image-box"><img src="PEDRO14.JPG"></div>
+    <div class="image-box"><img src="PEDRO15.JPG"></div>
+  </div>
+
+  <div class="bottom-input">
+    <input type="number" id="nominal" placeholder="NOMINAL">
+    <div class="total">TOTAL: Rp <span id="total">0</span></div>
+  </div>
+
+  <div class="saldo-overlay">Saldo Akun: Rp <span id="saldoAkun"></span></div>
+  <button class="send" id="sendBtn">KIRIM</button>
+  <div class="warning" id="warning">⚠️ Saldo Akun Tidak Mencukupi</div>
+  <div class="success" id="successMsg">Pesanan berhasil ✔️</div>
 </div>
-<div class="content">
-<div class="product-list">
-<div class="product" data-jenis="PRODUK UNGGULAN">PRODUK UNGGULAN</div>
-<div class="product" data-jenis="PRODUK GANDA">PRODUK GANDA</div>
-<div class="product" data-jenis="GANDA BAGIAN">GANDA BAGIAN</div>
-<div class="product" data-jenis="TUNGGAL BAGIAN">TUNGGAL BAGIAN</div>
-</div>
-<div class="logo-box"><img src="PEDRO.PNG"></div> 
-</div>
-<div class="image-grid">
-<img src="PEDRO1.JPG">
-<img src="PEDRO2.JPG">
-<img src="PEDRO3.JPG">
-<img src="PEDRO4.JPG">
-<img src="PEDRO5.JPG">
-<img src="PEDRO6.JPG">
-<img src="PEDRO7.JPG">
-<img src="PEDRO8.JPG">
-<img src="PEDRO9.JPG">
-<img src="PEDRO10.JPG">
-<img src="PEDRO11.JPG">
-<img src="PEDRO12.JPG">
-<img src="PEDRO13.JPG">
-<img src="PEDRO14.JPG">
-<img src="PEDRO15.JPG">
-</div>
-<div class="bottom-input">
-<input type="number" id="nominal" placeholder="NOMINAL">
-<div class="total">TOTAL: Rp <span id="total">0</span></div>
-</div>
-<div class="saldo-overlay">Saldo Akun: Rp <span id="saldoAkun"></span></div>
-<button class="send" id="sendBtn">KIRIM</button>
-<div class="warning" id="warning">⚠️ Saldo Akun Tidak Mencukupi</div>
-<div class="success" id="successMsg">Pesanan berhasil ✔️</div>
-</div>
+
 <script>
 let saldo=Number(localStorage.getItem('saldo')||1000000);
 const saldoAkun=document.getElementById('saldoAkun');
@@ -95,61 +101,56 @@ const SESSION=300;
 let endTime=Number(localStorage.getItem('sessionEnd'))||(Date.now()+SESSION*1000);
 
 function nextOrder(){
-const d=new Date();
-const keyDate=`${d.getFullYear()}${String(d.getMonth()+1).padStart(2,'0')}${String(d.getDate()).padStart(2,'0')}`;
-let n=Number(localStorage.getItem(keyDate)||0)+1;
-localStorage.setItem(keyDate,n);
-orderNumber.innerText=`${keyDate}${String(n).padStart(4,'0')}`;
+  const d=new Date();
+  const keyDate=`${d.getFullYear()}${String(d.getMonth()+1).padStart(2,'0')}${String(d.getDate()).padStart(2,'0')}`;
+  let n=Number(localStorage.getItem(keyDate)||0)+1;
+  localStorage.setItem(keyDate,n);
+  orderNumber.innerText=`${keyDate}${String(n).padStart(4,'0')}`;
 }
 nextOrder();
 
 function hitungTotal(){
-const n=Number(nominalInput.value||0);
-let total=0;
-products.forEach(p=>{if(p.classList.contains('active')) total+=n;});
-totalText.innerText=total.toLocaleString('id-ID');
-return total;
+  const n=Number(nominalInput.value||0);
+  let total=0;
+  products.forEach(p=>{if(p.classList.contains('active')) total+=n;});
+  totalText.innerText=total.toLocaleString('id-ID');
+  return total;
 }
 products.forEach(p=>{p.onclick=()=>{p.classList.toggle('active'); hitungTotal();}});
 nominalInput.oninput=hitungTotal;
 
 sendBtn.onclick=()=>{
-const total=hitungTotal();
-if(total>saldo){warning.style.display='block';setTimeout(()=>warning.style.display='none',2000);return;}
-successMsg.style.display='block';setTimeout(()=>successMsg.style.display='none',2000);
-saldo-=total;
-localStorage.setItem('saldo',saldo);
-saldoAkun.innerText=saldo.toLocaleString('id-ID');
-nominalInput.value='';totalText.innerText='0';
-products.forEach(p=>p.classList.remove('active'));
-nextOrder();
+  const total=hitungTotal();
+  if(total>saldo){warning.style.display='block';setTimeout(()=>warning.style.display='none',2000);return;}
+  successMsg.style.display='block';setTimeout(()=>successMsg.style.display='none',2000);
+  saldo-=total;
+  localStorage.setItem('saldo',saldo);
+  saldoAkun.innerText=saldo.toLocaleString('id-ID');
+  nominalInput.value='';totalText.innerText='0';
+  products.forEach(p=>p.classList.remove('active'));
+  nextOrder();
 }
 
 setInterval(()=>{
-let s=Math.floor((endTime-Date.now())/1000);
-sessionTime.innerText=`${String(Math.floor(s/60)).padStart(2,'0')}:${String(s%60).padStart(2,'0')}`;
-if(s<=5&&s>0){alert("⏰ Waktu sesi akan berakhir, silakan menunggu waktu sesi berikutnya");}
-if(s<=0){
-const total=hitungTotal();
-const active=[...products].filter(p=>p.classList.contains('active'));
-const types=active.map(p=>p.dataset.jenis);
-if(active.length>0){
-const onlyUGG_GANDA=types.every(t=>t==='PRODUK UNGGULAN'||t==='PRODUK GANDA');
-if(onlyUGG_GANDA){saldo+=Number(nominalInput.value||0)*2;}else{saldo-=total;if(saldo<0) saldo=0;}
-}
-localStorage.setItem('saldo',saldo);
-saldoAkun.innerText=saldo.toLocaleString('id-ID');
-products.forEach(p=>p.classList.remove('active'));
-nominalInput.value='';totalText.innerText='0';
-endTime=Date.now()+SESSION*1000;
-localStorage.setItem('sessionEnd',endTime);
-}else{localStorage.setItem('sessionEnd',endTime);}
+  let s=Math.floor((endTime-Date.now())/1000);
+  sessionTime.innerText=`${String(Math.floor(s/60)).padStart(2,'0')}:${String(s%60).padStart(2,'0')}`;
+  if(s<=5&&s>0){alert("⏰ Waktu sesi akan berakhir, silakan menunggu waktu sesi berikutnya");}
+  if(s<=0){
+    const total=hitungTotal();
+    const active=[...products].filter(p=>p.classList.contains('active'));
+    const types=active.map(p=>p.dataset.jenis);
+    if(active.length>0){
+      const onlyUGG_GANDA=types.every(t=>t==='PRODUK UNGGULAN'||t==='PRODUK GANDA');
+      if(onlyUGG_GANDA){saldo+=Number(nominalInput.value||0)*2;}else{saldo-=total;if(saldo<0) saldo=0;}
+    }
+    localStorage.setItem('saldo',saldo);
+    saldoAkun.innerText=saldo.toLocaleString('id-ID');
+    products.forEach(p=>p.classList.remove('active'));
+    nominalInput.value='';totalText.innerText='0';
+    endTime=Date.now()+SESSION*1000;
+    localStorage.setItem('sessionEnd',endTime);
+  }else{localStorage.setItem('sessionEnd',endTime);}
 },1000);
 </script>
 </body>
 </html>
-
-
-
-
-
