@@ -79,6 +79,7 @@ input{padding:8px}
 <button class="send" id="sendBtn">KIRIM</button>
 <div class="warning" id="warning">⚠️ Saldo Akun Tidak Mencukupi</div>
 <div class="success" id="successMsg">Pesanan berhasil ✔️</div>
+</div>
 <script>
 let saldo=Number(localStorage.getItem('saldo')||1000000);
 const saldoAkun=document.getElementById('saldoAkun');
@@ -148,3 +149,4 @@ localStorage.setItem('sessionEnd',endTime);
 </script>
 </body>
 </html>
+
