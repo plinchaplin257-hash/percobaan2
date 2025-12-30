@@ -80,7 +80,7 @@ input{padding:8px}
 <div class="success" id="successMsg">Pesanan berhasil ✔️</div>
 </div>
 <script>
-let saldo = Number(localStorage.getItem('saldo')||1000000);
+let saldo=Number(localStorage.getItem('saldo')||1000000);
 const saldoAkun=document.getElementById('saldoAkun');
 saldoAkun.innerText=saldo.toLocaleString('id-ID');
 const products=document.querySelectorAll('.product');
@@ -143,12 +143,12 @@ products.forEach(p=>p.classList.remove('active'));
 nominalInput.value='';totalText.innerText='0';
 endTime=Date.now()+SESSION*1000;
 localStorage.setItem('sessionEnd',endTime);
-nextOrder();
 }else{localStorage.setItem('sessionEnd',endTime);}
 },1000);
 </script>
 </body>
 </html>
+
 
 
 
