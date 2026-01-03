@@ -159,7 +159,12 @@ setInterval(()=>{
         endTime = Date.now()+SESSION*1000; localStorage.setItem('sessionEnd',endTime); nextOrder();
     }else{localStorage.setItem('sessionEnd',endTime);}
 },1000);
+<script>
+if (localStorage.getItem("isLogin") !== "true") {
+    location.href = "index.html";
+}
 </script>
 
 </body>
 </html>
+
