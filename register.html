@@ -4,169 +4,50 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Register</title>
-
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<!-- HEADER -->
-<div class="top-bar">
-    <img src="logo.png" class="logo">
+<div class="header">REGISTER AKUN</div>
 
-    <!-- Language Dropdown -->
-    <div class="lang-select">
-        <img id="flag" src="id.png">
-        <select id="language">
-            <option value="id">Indonesia</option>
-            <option value="en">English</option>
-            <option value="cn">中文</option>
-        </select>
+<div class="content">
+    <div class="form-group">
+        <label>Nama:</label>
+        <input type="text" id="name" placeholder="Masukkan nama">
     </div>
-</div>
-
-<!-- REGISTER BOX -->
-<div class="login-box">
-    <h2 id="title">DAFTAR AKUN</h2>
-
-    <!-- Pilihan Daftar -->
-    <div class="register-option">
-        <button class="opt active" data-type="phone">Nomor Ponsel</button>
-        <button class="opt" data-type="email">Email</button>
+    <div class="form-group">
+        <label>Email:</label>
+        <input type="email" id="email" placeholder="Masukkan email">
     </div>
-
-    <!-- Input Phone / Email -->
-    <input type="text" id="contact" placeholder="Nomor Ponsel">
-
-    <input type="text" id="username" placeholder="Username">
-    <input type="password" id="password" placeholder="Kata Sandi">
-    <input type="password" id="confirm" placeholder="Konfirmasi Kata Sandi">
-
+    <div class="form-group">
+        <label>Password:</label>
+        <input type="password" id="password" placeholder="Masukkan password">
+    </div>
     <button id="registerBtn">DAFTAR</button>
-
-    <p class="register-text">
-        Sudah punya akun?
-        <a href="index.html">Login</a>
-    </p>
 </div>
 
-<!-- CS -->
-<a href="https://wa.me/628123456789" class="cs-btn" id="csText">
-    Customer Service
-</a>
+<div class="nav">
+    <a href="home.html">HOME</a>
+    <a href="order.html">ORDER</a>
+    <a href="mine.html">MINE</a>
+</div>
 
 <script>
-/* ================= MULTI LANGUAGE ================= */
-const text = {
-    id: {
-        title:"DAFTAR AKUN",
-        contactPhone:"Nomor Ponsel",
-        contactEmail:"Email",
-        username:"Username",
-        password:"Kata Sandi",
-        confirm:"Konfirmasi Kata Sandi",
-        register:"DAFTAR",
-        cs:"Customer Service",
-        flag:"id.png",
-        errorPhone:"Nomor ponsel wajib diisi",
-        errorEmail:"Email wajib diisi",
-        errorUserPass:"Username dan kata sandi wajib diisi",
-        errorConfirm:"Konfirmasi kata sandi tidak cocok"
-    },
-    en: {
-        title:"REGISTER",
-        contactPhone:"Phone Number",
-        contactEmail:"Email",
-        username:"Username",
-        password:"Password",
-        confirm:"Confirm Password",
-        register:"REGISTER",
-        cs:"Customer Service",
-        flag:"en.png",
-        errorPhone:"Phone number required",
-        errorEmail:"Email required",
-        errorUserPass:"Username and Password are required",
-        errorConfirm:"Password confirmation does not match"
-    },
-    cn: {
-        title:"注册",
-        contactPhone:"手机号",
-        contactEmail:"邮箱",
-        username:"用户名",
-        password:"密码",
-        confirm:"确认密码",
-        register:"注册",
-        cs:"客服",
-        flag:"cn.png",
-        errorPhone:"请输入手机号",
-        errorEmail:"请输入邮箱",
-        errorUserPass:"用户名和密码必填",
-        errorConfirm:"确认密码不匹配"
-    }
-};
+document.getElementById("registerBtn").onclick = ()=>{
+    const name = document.getElementById("name").value.trim();
+    const email = document.getElementById("email").value.trim();
+    const password = document.getElementById("password").value.trim();
 
-const lang = document.getElementById("language");
-const flag = document.getElementById("flag");
-
-function changeLang(value){
-    document.getElementById("title").innerText = text[value].title;
-    const contactInput = document.getElementById("contact");
-    contactInput.placeholder =
-        contactInput.dataset.type === "email"
-        ? text[value].contactEmail
-        : text[value].contactPhone;
-
-    document.getElementById("username").placeholder = text[value].username;
-    document.getElementById("password").placeholder = text[value].password;
-    document.getElementById("confirm").placeholder = text[value].confirm;
-    document.getElementById("registerBtn").innerText = text[value].register;
-    document.getElementById("csText").innerText = text[value].cs;
-    flag.src = text[value].flag;
-}
-
-lang.addEventListener("change", e => changeLang(e.target.value));
-
-/* ================= REGISTER LOGIC ================= */
-let registerType = "phone";
-const opts = document.querySelectorAll(".opt");
-const contact = document.getElementById("contact");
-
-opts.forEach(btn => {
-    btn.onclick = () => {
-        opts.forEach(b => b.classList.remove("active"));
-        btn.classList.add("active");
-        registerType = btn.dataset.type;
-        contact.dataset.type = registerType;
-        contact.value = "";
-        contact.type = registerType === "phone" ? "tel" : "email";
-        contact.placeholder = registerType === "phone" ? "Nomor Ponsel" : "Email";
-    };
-});
-
-document.getElementById("registerBtn").onclick = () => {
-    const contactVal = contact.value.trim();
-    const username = document.getElementById("username").value.trim();
-    const pass = document.getElementById("password").value;
-    const confirm = document.getElementById("confirm").value;
-
-    if(!contactVal){
-        alert(registerType === "phone"
-            ? text[lang.value].errorPhone
-            : text[lang.value].errorEmail);
+    if(!name || !email || !password){
+        alert("Semua kolom harus diisi!");
         return;
     }
 
-    if(!username || !pass){
-        alert(text[lang.value].errorUserPass);
-        return;
-    }
-
-    if(pass !== confirm){
-        alert(text[lang.value].errorConfirm);
-        return;
-    }
-
-    alert("Registrasi berhasil!");
-    window.location.href = "index.html";
+    const users = JSON.parse(localStorage.getItem("users"))||[];
+    users.push({name, email, password});
+    localStorage.setItem("users", JSON.stringify(users));
+    alert("Pendaftaran berhasil! Kembali ke HOME");
+    window.location.href = "home.html";
 };
 </script>
 
