@@ -1,199 +1,173 @@
-/* ================= RESET GLOBAL ================= */
+/* ================= RESET ================= */
 * {
+    box-sizing: border-box;
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
     font-family: Arial, sans-serif;
 }
 
-/* ================= BODY GLOBAL ================= */
 body {
-    min-height: 100vh;
     background: #ffffff;
-    color: #fff;
+    min-height: 100vh;
 }
 
-/* ================= TOP BAR (LOGIN, REGISTER, HOME) ================= */
+/* ================= TOP BAR ================= */
 .top-bar {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 12px;
+    padding: 10px;
     background: #080707;
     position: sticky;
     top: 0;
-    z-index: 99;
+    z-index: 10;
 }
 
-.top-bar .logo {
+.top-bar img.logo {
     height: 60px;
 }
 
-/* ================= LANGUAGE ================= */
-.lang-select {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-}
-
-.lang-select img {
-    width: 22px;
-    height: 15px;
-    object-fit: cover;
-}
-
-.lang-select select {
-    padding: 4px 6px;
-    border-radius: 4px;
+.profile-btn {
+    padding: 8px 14px;
     border: none;
+    border-radius: 8px;
+    background: #b84d00;
+    color: white;
     cursor: pointer;
 }
 
-/* ================= LOGIN & REGISTER BOX ================= */
-.login-box {
-    max-width: 380px;
-    margin: 60px auto;
-    background: #000;
-    padding: 25px;
-    border-radius: 14px;
-    color: #fff;
-    box-shadow: 0 0 15px rgba(0,0,0,.6);
+/* ================= MAIN CONTENT ================= */
+.main-content {
+    padding: 10px;
 }
 
-.login-box h2 {
-    text-align: center;
+/* ================= SLIDER ================= */
+.slider {
+    width: 100%;
+    height: 250px;
+    overflow: hidden;
+    border-radius: 15px;
     margin-bottom: 20px;
 }
 
-/* ================= REGISTER OPTION ================= */
-.register-option {
+.slider-track {
+    display: flex;
+    transition: transform 0.5s ease;
+}
+
+.slider-track img {
+    width: 100%;
+    flex-shrink: 0;
+    object-fit: cover;
+}
+
+/* ================= BRAND + PREVIEW ================= */
+.brand-preview-container {
     display: flex;
     gap: 10px;
-    margin-bottom: 15px;
+    margin-bottom: 25px;
 }
 
-.opt {
+.brand-list {
+    flex: 0 0 35%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.brand-item {
+    height: 70px;
+    background: #9a9a9c;
+    border-radius: 10px;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.brand-item:hover {
+    background: #eaeaea;
+}
+
+.preview-container {
     flex: 1;
-    padding: 10px;
-    background: #333;
-    border: none;
-    color: #fff;
-    border-radius: 999px;
-    cursor: pointer;
-    position: relative;
-    overflow: hidden;
-    font-weight: bold;
-    transition: all 0.25s ease;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-.opt.active {
-    background: #b84d00;
-}
-
-/* Hover efek */
-.opt:hover {
-    transform: translateY(-2px) scale(1.03);
-    box-shadow: 0 6px 15px rgba(255,90,0,0.6);
-}
-
-.opt:active {
-    transform: scale(0.95);
-}
-
-/* Cahaya sweep */
-.opt::after {
-    content: "";
-    position: absolute;
+#previewImg {
     width: 100%;
-    height: 100%;
-    background: linear-gradient(120deg, transparent, rgba(255,255,255,.3), transparent);
-    top: 0;
-    left: -100%;
-    transition: 0.4s;
-}
-
-.opt:hover::after {
-    left: 100%;
-}
-
-/* ================= INPUT ================= */
-.login-box input {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 12px;
-    border-radius: 8px;
-    border: none;
-    outline: none;
-}
-
-/* ================= BUTTON LOGIN / REGISTER ================= */
-#loginBtn,
-#registerBtn {
-    width: 100%;
-    padding: 12px;
-    background: linear-gradient(145deg, #ff2f00, #c32000);
-    color: #fff;
-    border: none;
+    max-height: 320px;
     border-radius: 12px;
+    display: none;
+    object-fit: contain;
+}
+
+/* ================= PROFIL PERUSAHAAN ================= */
+.company-profile {
+    margin-bottom: 30px;
+    color: #333;
+}
+
+.company-profile h2 {
+    margin-bottom: 10px;
+}
+
+.company-profile p {
+    margin-bottom: 10px;
+    line-height: 1.6;
+}
+
+/* ================= SUPPORTED BY ================= */
+.supported-by {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.supported-by h3 {
+    margin-bottom: 15px;
+    font-weight: bold;
+}
+
+.supported-logos {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.supported-logos img {
+    height: 50px;
+    object-fit: contain;
+}
+
+/* ================= BOTTOM MENU ================= */
+.bottom-menu {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: #9e9e9e;
+    display: flex;
+    justify-content: space-around;
+    padding: 12px 0;
+}
+
+.bottom-menu button {
+    background: none;
+    border: none;
     font-weight: bold;
     cursor: pointer;
-    transition: all 0.25s ease;
 }
 
-/* Hover */
-#loginBtn:hover,
-#registerBtn:hover {
-    transform: translateY(-2px) scale(1.03);
-    box-shadow: 0 6px 15px rgba(255,90,0,0.6);
+.bottom-menu .active {
+    color: #b84d00;
 }
 
-/* Klik */
-#loginBtn:active,
-#registerBtn:active {
-    transform: scale(0.95);
-}
-
-/* ================= TEXT ================= */
-#registerText,
-.register-text {
-    margin-top: 15px;
-    text-align: center;
-    font-size: 14px;
-}
-
-#registerText a,
-.register-text a {
-    color: #ff9f43;
-    text-decoration: none;
-}
-
-/* ================= CS BUTTON ================= */
-.cs-btn {
-    position: fixed;
-    right: 15px;
-    bottom: 90px;
-    background: #25D366;
-    color: #fff;
-    padding: 10px 15px;
-    border-radius: 30px;
-    text-decoration: none;
-    font-weight: bold;
-    box-shadow: 0 4px 8px rgba(0,0,0,.4);
-    z-index: 99;
-    transition: all 0.25s ease;
-}
-
-.cs-btn:hover {
-    transform: translateY(-2px) scale(1.03);
-    box-shadow: 0 6px 15px rgba(0,255,100,0.6);
-}
-
-.cs-btn:active {
-    transform: scale(0.95);
-}
-
-/* ================= BRAND PAGE (1–4) ================= */
-body > .header {
+/* ================= BRAND PAGE ================= */
+.header {
     display: flex;
     align-items: center;
     padding: 10px;
@@ -228,63 +202,48 @@ body > .header {
     color: #fff;
     padding: 8px;
     text-align: center;
-    border-radius: 12px;
-    box-shadow: 0 4px 10px rgba(0,0,0,.6), inset 0 0 10px rgba(255,255,255,.05);
+    border-radius: 8px;
+    transition: all .2s ease;
 }
 
-/* ================= PRODUCT BUTTON ================= */
-.product-list .product {
-    border-radius: 999px !important;
-    padding: 14px 20px !important;
-    font-weight: bold;
-    letter-spacing: .6px;
-    text-align: center;
+.box:active {
+    transform: scale(.96);
+    box-shadow: 0 4px 12px rgba(0,0,0,.7);
+}
+
+.content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+}
+
+.product-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.product {
+    background: #000;
+    color: #fff;
+    padding: 10px;
     cursor: pointer;
+    border-radius: 999px;
+    transition: all .2s ease;
     position: relative;
     overflow: hidden;
-    background: linear-gradient(145deg, #111, #000) !important;
-    color: #fff !important;
-    box-shadow: 0 4px 10px rgba(0,0,0,.6), inset 0 0 10px rgba(255,255,255,.05) !important;
-    transition: all 0.25s ease !important;
+    text-align: center;
 }
 
-.product-list .product:hover {
-    transform: translateY(-3px) scale(1.05) !important;
-    box-shadow: 0 10px 30px rgba(255,120,0,0.9), inset 0 0 12px rgba(255,255,255,.08) !important;
+.product:hover {
+    transform: scale(1.03);
 }
 
-.product-list .product:active {
-    transform: scale(0.95) !important;
+.product.active {
+    background: #b84d00;
+    box-shadow: 0 0 0 2px #ffb26a, 0 6px 15px rgba(255,122,0,.7);
 }
 
-/* Cahaya sweep */
-.product-list .product::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    left: -130%;
-    background: linear-gradient(120deg, transparent, rgba(255,255,255,.35), transparent);
-    transition: 0.7s;
-}
-
-.product-list .product:hover::after {
-    left: 130%;
-}
-
-/* Active & Pulse */
-.product-list .product.active {
-    background: linear-gradient(145deg, #ff6a00, #c43b00) !important;
-    box-shadow: 0 0 25px rgba(255,100,0,1), inset 0 0 12px rgba(255,255,255,.2) !important;
-    animation: premiumPulse 1.4s infinite !important;
-}
-
-@keyframes premiumPulse {
-    0% { box-shadow: 0 0 0 rgba(255,120,0,.4), inset 0 0 10px rgba(255,255,255,.15); }
-    50% { box-shadow: 0 0 30px rgba(255,120,0,1), inset 0 0 14px rgba(255,255,255,.25); }
-    100% { box-shadow: 0 0 0 rgba(255,120,0,.4), inset 0 0 10px rgba(255,255,255,.15); }
-}
-
-/* ================= LOGO BOX ================= */
 .logo-box {
     background: #000;
     height: 200px;
@@ -292,15 +251,15 @@ body > .header {
     justify-content: center;
     align-items: center;
     border-radius: 12px;
-    box-shadow: 0 4px 10px rgba(0,0,0,.6), inset 0 0 10px rgba(255,255,255,.05);
+    transition: all .25s ease;
 }
 
 .logo-box img {
     max-width: 90%;
     max-height: 90%;
+    pointer-events: none;
 }
 
-/* ================= IMAGE GRID ================= */
 .image-grid {
     margin: 15px 0;
     display: grid;
@@ -311,67 +270,69 @@ body > .header {
 .image-box {
     background: #000;
     height: 70px;
-    border-radius: 12px;
+    border-radius: 8px;
     overflow: hidden;
-    box-shadow: 0 4px 10px rgba(0,0,0,.6), inset 0 0 10px rgba(255,255,255,.05);
+    transition: all .2s ease;
 }
 
 .image-box img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform 0.4s ease;
+    pointer-events: none;
 }
 
-.image-box:hover img {
-    transform: scale(1.2);
-}
-
-/* ================= INPUT ================= */
 .bottom-input {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 10px;
+    margin-top: 20px;
 }
 
-.bottom-input input {
+input {
     padding: 8px;
-    border-radius: 8px;
-    border: none;
 }
 
-/* ================= TOTAL ================= */
 .total {
     background: #fff;
-    color: #000;
     padding: 8px;
-    border-radius: 8px;
-    text-align: center;
 }
 
-/* ================= SEND BUTTON ================= */
+.saldo-overlay {
+    text-align: center;
+    margin: 18px 0 12px;
+    background: rgba(0,0,0,.15);
+    padding: 8px;
+    border-radius: 8px;
+}
+
 .send {
     width: 100%;
     padding: 12px;
-    background: linear-gradient(145deg, #ff2f00, #c32000);
+    margin-top: 10px;
+    background: #ff2f00;
     color: #fff;
     border: none;
-    border-radius: 12px;
+    border-radius: 10px;
     font-weight: bold;
-    cursor: pointer;
-    transition: all 0.25s ease;
+    letter-spacing: 1px;
+    transition: all .2s ease;
 }
 
-.send:hover {
-    transform: translateY(-3px) scale(1.04);
-    box-shadow: 0 8px 25px rgba(255,80,0,0.9);
+.success {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    background: #2ecc71;
+    color: #fff;
+    padding: 15px 25px;
+    border-radius: 8px;
+    font-weight: bold;
+    z-index: 999;
 }
 
-.send:active {
-    transform: scale(0.95);
-}
-
-/* ================= WARNING ================= */
 .warning {
     display: none;
     background: red;
@@ -384,13 +345,5 @@ body > .header {
 }
 
 @keyframes blink {
-    50% { opacity: 0.5; }
-}
-
-/* ================= SALDO ================= */
-.saldo-overlay {
-    text-align: center;
-    margin: 10px 0;
-    background: rgba(0,0,0,.15);
-    padding: 6px;
+    50% { opacity: .5; }
 }
