@@ -121,7 +121,12 @@ orders.forEach((o,i)=>{
         ${i < orders.length-1 ? '<div class="divider"></div>' : ''}
     `;
 });
+<script>
+if (localStorage.getItem("isLogin") !== "true") {
+    location.href = "index.html";
+}
 </script>
 
 </body>
 </html>
+
